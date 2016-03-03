@@ -1,0 +1,3 @@
+script:
+  - latex -halt-on-error -interaction nonstopmode small2e
+  - pdflatex -halt-on-error -interaction nonstopmode small2e
