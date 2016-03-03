@@ -8,6 +8,14 @@ install:
   - export PATH="/opt/texbin:$PATH"
 
 ###############################################################################
+before_script:
+  # Check texlive version
+  - tlmgr version -v
+  # Check which tex packages we have available
+  - tlmgr info --only-installed ||
+        echo "Couldn't retrieve the texlive package list!"
+
+###############################################################################
 script:
   - latex -halt-on-error -interaction nonstopmode small2e
   - pdflatex -halt-on-error -interaction nonstopmode small2e
