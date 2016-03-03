@@ -1,5 +1,11 @@
 build_image: harshjv/texlive-2015
 
+install:
+  # Check texlive version
+  - tlmgr version -v
+  # Update texlive
+  - tlmgr update --all
+
 script:
   - latex -halt-on-error -interaction nonstopmode small2e
   - pdflatex -halt-on-error -interaction nonstopmode small2e
