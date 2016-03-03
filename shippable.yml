@@ -16,3 +16,12 @@ before_script:
 script:
   - latex -halt-on-error -interaction nonstopmode small2e
   - pdflatex -halt-on-error -interaction nonstopmode small2e
+
+before_archive:
+  # Archive the TeX log files, and any generated output files
+  - mkdir -p shippable/;
+    cp -f *.log shippable/;
+    cp -f *.dvi shippable/;
+    cp -f *.pdf shippable/;
+
+archive: true
