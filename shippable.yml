@@ -1,3 +1,5 @@
+build_image: harshjv/texlive-2015
+
 script:
   - latex -halt-on-error -interaction nonstopmode small2e
   - pdflatex -halt-on-error -interaction nonstopmode small2e
