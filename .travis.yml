@@ -1,11 +1,15 @@
 language: generic
 
+sudo: required
+
+services: docker
+
 ###############################################################################
+# Load up a docker container which has texlive 2015 installed, then
+# update it under instructions from Dockerfile
 install:
-  - travis_retry wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu
-  - chmod +x ./install-tl-ubuntu
-  - sudo ./install-tl-ubuntu
-  - export PATH="/opt/texbin:$PATH"
+  - docker build -t harshjv/texlive-2015 .
+  - docker ps -a
 
 ###############################################################################
 before_script:
