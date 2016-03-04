@@ -1,11 +1,29 @@
 language: generic
 
+sudo: required
+
 ###############################################################################
-install:
-  - travis_retry wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu
-  - chmod +x ./install-tl-ubuntu
-  - sudo ./install-tl-ubuntu
-  - export PATH="/opt/texbin:$PATH"
+matrix:
+  #----------------------------------------------------------------------------
+  # Install a fresh copy of texlive using the install-tl-ubuntu script
+  - install:
+      - travis_retry wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/install-tl-ubuntu
+      - chmod +x ./install-tl-ubuntu
+      - sudo ./install-tl-ubuntu
+      - export PATH="/opt/texbin:$PATH"
+  #----------------------------------------------------------------------------
+  # Load up a docker container which has texlive 2015 installed
+  - services: docker
+    install:
+      - docker pull harshjv/texlive-2015
+      - docker ps -a
+  #----------------------------------------------------------------------------
+  # Load up a docker container which has texlive 2015 installed, then
+  # update it under instructions from Dockerfile
+  - services: docker
+    install:
+      - docker build -t harshjv/texlive-2015 .
+      - docker ps -a
 
 ###############################################################################
 before_script:
