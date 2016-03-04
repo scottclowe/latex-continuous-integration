@@ -17,5 +17,12 @@ before_script:
 
 ###############################################################################
 script:
+  # Use this for simple DVI
   - latex -halt-on-error -interaction nonstopmode small2e
+  # Use this for simple PDF
   - pdflatex -halt-on-error -interaction nonstopmode small2e
+  # Use this for PDF with bibtex citations
+  - pdflatex -halt-on-error -interaction nonstopmode sample_article &&
+    bibtex sample_article &&
+    pdflatex -halt-on-error -interaction nonstopmode sample_article &&
+    pdflatex -halt-on-error -interaction nonstopmode sample_article
